@@ -1,0 +1,6 @@
+2025-03-17 12:10:49,151 - DEBUG - Starting new HTTPS connection (1): usito.usherbrooke.ca:443
+2025-03-17 12:10:49,752 - DEBUG - https://usito.usherbrooke.ca:443 "GET /d%C3%A9finitions/avocat HTTP/1.1" 200 24363
+2025-03-17 12:10:49,939 - DEBUG - Starting new HTTPS connection (1): usito.usherbrooke.ca:443
+2025-03-17 12:10:50,620 - DEBUG - https://usito.usherbrooke.ca:443 "GET /d%C3%A9finitions/avocat_1 HTTP/1.1" 200 32458
+2025-03-17 12:10:50,915 - DEBUG - Starting new HTTPS connection (1): usito.usherbrooke.ca:443
+2025-03-17 12:10:51,543 - DEBUG - https://usito.usherbrooke.ca:443 "GET /d%C3%A9finitions/avocat_2 HTTP/1.1" 200 28425

@@ -19,6 +19,7 @@ def get_word(file):
 # Initialisation des variables
 file = "words.txt"
 word = get_word(file)
+word = "avocat" 
 definitions = mots.getWordDefinition(word)
 trouve = bool()
 

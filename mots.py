@@ -75,9 +75,14 @@ def getWordDefinition(word):
         except Exception as e:
             logging.critical(f"Erreur inattendue : {e}")
     if len(definition) == 0:
-        word += '_1'
-        definition = getWordDefinition(word)
-    if len(definition) == 0 and word.endwith("_1"):
+	#essayer deux mots homonymes au moins 
+        i=1
+        for suffix in ["_1","_2"]:
+            #print(word)
+            definition.extend([f"{i}e definition : "])
+            definition.extend(getWordDefinition(word+suffix))
+            i+=1
+    if len(definition) == 0 and ( word.endswith("_1") or word.endswith("_2")):
         logging.warning(f"Le mot {word} n'a pas de définition")
         definition.append("Pas de définition trouvée")
     return definition
