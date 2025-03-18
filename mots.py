@@ -68,26 +68,34 @@ def getWordDefinition(word):
             result = session.get(link)
             result.raise_for_status()
             soup = BeautifulSoup(result.text, 'html.parser')
-            definition = soup.select(" .def_sous_entree-style")
-            definition = [d.get_text() for d in definition]
+            definition_elements = soup.select(".def_sous_entree-style")
+            definition = [d.get_text() for d in definition_elements]
         except requests.RequestException as e:
             logging.error(f"Erreur de requête : {e}")
         except Exception as e:
             logging.critical(f"Erreur inattendue : {e}")
+    return definition
+
+def getDef(word):
+    definition = getWordDefinition(word)
     if len(definition) == 0:
-	#essayer deux mots homonymes au moins 
-        i=1
-        for suffix in ["_1","_2"]:
-            #print(word)
-            definition.extend([f"{i}e definition : "])
-            definition.extend(getWordDefinition(word+suffix))
-            i+=1
-    if len(definition) == 0 and ( word.endswith("_1") or word.endswith("_2")):
-        logging.warning(f"Le mot {word} n'a pas de définition")
-        definition.append("Pas de définition trouvée")
+        i = 1
+        for suffix in ["_1","_2", "_3"]:
+            tempdef = getWordDefinition(word + suffix)
+            logging.info("Autres tentatives avec les homonymes !")
+            if len(tempdef) > 0:
+                logging.info(f"{i}e homonyme trouvé")
+                definition.append(f"{i}e definition \n")
+                definition.extend(tempdef)
+                i+=1
+            else:
+                logging.info(f"{i}e homonyme non trouvé ! ")
+        if len(definition) == 0:
+            logging.info(f"Pas de définition trouvée pour le mot {word}")
+            definition.append("Pas de définition trouvé pour ce mot")
     return definition
 
 if __name__ == "__main__":
-    mot = input("mot : ").replace("\t", "").replace("\n", "")
-    definition = getWordDefinition(mot)
+    mot = input("mot : ")
+    definition = getDef(mot)
     pprint(definition)

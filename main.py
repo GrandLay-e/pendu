@@ -19,7 +19,7 @@ def get_word(file):
 # Initialisation des variables
 file = "words.txt"
 word = get_word(file)
-definitions = mots.getWordDefinition(word)
+definitions = mots.getDef(word)
 trouve = bool()
 
 vies = len(word) + len(word)//2
@@ -43,14 +43,17 @@ while trouve == False or vies > 0:
     if lettre.isalpha():
         if lettre not in word:
             vies -=1
-            print(f"Raté ❌ \n {"".join(mot_en_cours)} \n Nombre de vies : {vies * "❤️ "} ({vies})")
+            print(f"Raté ❌ : {"".join(mot_en_cours)} \n Nombre de vies : {vies * "❤️ "} ({vies})")
         else:
-            i=0
-            while i< len(word):
-                if lettre == word[i]:
-                    mot_en_cours[i] = lettre
-                i+=1
-            print("Lettre touvé ✅ : ", "".join(mot_en_cours), f"\n Nombre de vie : {vies * "❤️ "} ({vies})")
+            if lettre not in mot_en_cours:
+                i=0
+                while i< len(word):
+                    if lettre == word[i]:
+                        mot_en_cours[i] = lettre
+                    i+=1
+                print(f"Lettre trouvée ✅ : {"".join(mot_en_cours)} \n Nombre de vies : {vies *"❤️ "} ({vies})")
+            else:
+                print("Lettre dejà trouvée ! Essayez en d'autres ")
     else:
         print("Veuillez saisir une lettre SVP ! ")
 
@@ -63,14 +66,15 @@ while trouve == False or vies > 0:
     #Fin des tentatives sans trouver le bon mot
     if vies < 1 and trouve == False:
         print(f"PERDU ! 💔, Vies : 0 \n Le mot à Déviner était : {word}")
+        vies = 1
         break
+
 #Afficher le score dans tous les cas
 print(f" Score : {vies * 5} 🏆")
 
 #Ainsi que le définition du mot (s'il est trouvé)
 print("Définition(s) du mot : ")
-i = 1
 for definition in definitions:
-    print(f"{i} - {definition}")
-    i+=1
+    print(f" - {definition}")
+    
 print("Fin du jeu !")
