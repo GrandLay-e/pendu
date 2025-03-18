@@ -81,8 +81,8 @@ def getDef(word):
     if len(definition) == 0:
         i = 1
         for suffix in ["_1","_2", "_3"]:
-            tempdef = getWordDefinition(word + suffix)
             logging.info("Autres tentatives avec les homonymes !")
+            tempdef = getWordDefinition(word + suffix)
             if len(tempdef) > 0:
                 logging.info(f"{i}e homonyme trouvé")
                 definition.append(f"{i}e definition \n")
@@ -92,7 +92,7 @@ def getDef(word):
                 logging.info(f"{i}e homonyme non trouvé ! ")
         if len(definition) == 0:
             logging.info(f"Pas de définition trouvée pour le mot {word}")
-            definition.append("Pas de définition trouvé pour ce mot")
+            definition.append("Pas de définition trouvée pour ce mot")
     return definition
 
 if __name__ == "__main__":

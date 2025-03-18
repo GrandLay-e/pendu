@@ -76,5 +76,4 @@ print(f" Score : {vies * 5} 🏆")
 print("Définition(s) du mot : ")
 for definition in definitions:
     print(f" - {definition}")
-    
 print("Fin du jeu !")
